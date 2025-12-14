@@ -1,7 +1,7 @@
 
 const Search = () => {
     return (
-        <div className="flex flex-1">Search</div>
+        <div className="hidden md:flex flex-1">Search</div>
     )
 }
 

@@ -1,7 +1,7 @@
 
 const User = () => {
     return (
-        <div>User</div>
+        <div className="hidden md:flex">User</div>
     )
 }
 
