@@ -23,7 +23,9 @@ const Category = () => {
     ]
 
     return (
-        <div>Category</div>
+        <div className="flex items-center justify-center px:3 md:px-10 gap-3 md:gap-10 py-5 md:py-8 overflow-x-auto">
+            Category
+        </div>
     )
 }
 
