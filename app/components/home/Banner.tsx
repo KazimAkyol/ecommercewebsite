@@ -2,8 +2,8 @@ import Image from "next/image"
 
 const Banner = () => {
     return (
-        <div className="h-[237px] bg-black">
-            <div className="h-[137px] relative">
+        <div className="h-59.25 bg-black flex items-center">
+            <div className="h-34.25 relative w-full">
                 <Image src="/hepsi.jpeg" fill alt="" />
             </div>
         </div>
