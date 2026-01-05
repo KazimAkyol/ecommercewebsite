@@ -1,10 +1,10 @@
 
 const Footer: React.FC = () => {
     return (
-        <footer className="bg-gray-800 text-white py-6">
+        <footer className="bg-orange-700 text-white py-6">
             <div className="container mx-auto flex justify-between items-center">
                 <div>
-                    <h2 className="text-lg font-semibold">turkuaz.com</h2>
+                    <h2 className="text-lg font-semibold">cimbom.com</h2>
                     <p className="text-sm">Tüm haklari saklidir © 2025</p>
                 </div>
                 <div className="flex space-x-4">
