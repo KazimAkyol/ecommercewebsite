@@ -1,7 +1,19 @@
+import DetailClient from "@/app/components/detail/DetailClient";
 
-const Detail = ({params}) => {
+type DetailProps = {
+    productId: string
+}
+
+const Detail = ({ params }: { params: DetailProps }) => {
+
+    const { productId } = params;
+
+    const product = products.find(product => product.id == productId);
+
     return (
-        <div>Detail</div>
+        <div>
+            <DetailClient />
+        </div>
     )
 }
 
