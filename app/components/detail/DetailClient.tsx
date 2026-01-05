@@ -1,8 +1,14 @@
 "use client"
 
-const DetailClient = () => {
+import PageContainer from "../containers/PageContainer"
+
+const DetailClient = ({ product }: { product: any }) => {
     return (
-        <div>DetailClient</div>
+        <div className="my-10">
+            <PageContainer>
+                {product?.name}
+            </PageContainer>
+        </div>
     )
 }
 
