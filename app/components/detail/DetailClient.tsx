@@ -14,12 +14,16 @@ const DetailClient = ({ product }: { product: any }) => {
                     <div className="w-1/2 space-y-3">
                         <div className="text-xl md:text-2xl">{product?.name}</div>
                         <div className="text-slate-500">{product?.description}</div>
-                        <div>
+                        <div className="flex items-center gap-2">
                             <div>STOK DURUMU:</div>
                             {
-                                product.inStock ? <div className="text-green-500">Ürün Stokta Mevcut</div> : <div className="text-red-500">Ürün Stokta Bulunmamakta</div>
+                                product.inStock
+                                    ?
+                                    <div className="text-green-500">Ürün Stokta Mevcut</div> :
+                                    <div className="text-red-500">Ürün Stokta Bulunmamakta</div>
                             }
                         </div>
+                        
                     </div>
                 </div>
             </PageContainer>
