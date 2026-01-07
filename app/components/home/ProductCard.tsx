@@ -9,6 +9,7 @@ const ProductCard = ({ product }: { product: any }) => {
     const router = useRouter();
 
     let productRating = product?.reviews?.reduce((acc: number, item: any) => acc + item.rating, 0) / product?.reviews?.length
+
     return (
         <div onClick={() => router.push(`product/${product.id}`)}
             className="w-60 cursor-pointer flex flex-col flex-1 shadow-lg p-2 rounded-md">
@@ -17,7 +18,7 @@ const ProductCard = ({ product }: { product: any }) => {
             </div>
             <div className="text-center mt-2 space-y-1">
                 <div>{textClip(product.name)}</div>
-                <Rating name="read-only" value={4} readOnly />
+                <Rating name="read-only" value={productRating} readOnly />
                 <div className="text-orange-600 font-bold text-lg md:text-xl">${product.price}</div>
             </div>
         </div>
