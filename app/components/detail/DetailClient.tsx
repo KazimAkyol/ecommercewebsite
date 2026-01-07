@@ -5,6 +5,7 @@ import PageContainer from "../containers/PageContainer"
 import Counter from "../general/Counter"
 import { useState } from "react"
 
+// export type CardProductProps ifadesi Typescript'te bir tür tanimlamak icin kullanilir.
 export type CardProductProps = {
     id: string
     name: string
@@ -27,6 +28,15 @@ const DetailClient = ({ product }: { product: any }) => {
         inStock: product.inStock,
     })
 
+    const increaseFunc = () => {
+        if (cardProduct.quantity == 10) return
+        setCardProduct((prev) => ({ ...prev, quantity: prev.quantity + 1 }))
+    }
+    const decreaseFunc = () => {
+        if (cardProduct.quantity == 1) return
+        setCardProduct((prev) => ({ ...prev, quantity: prev.quantity - 1 }))
+    }
+
     return (
         <div className="my-10">
             <PageContainer>
@@ -46,7 +56,7 @@ const DetailClient = ({ product }: { product: any }) => {
                                     <div className="text-red-500">Ürün Stokta Bulunmamakta</div>
                             }
                         </div>
-                        <Counter cardProduct={cardProduct} />
+                        <Counter increaseFunc={increaseFunc} decreaseFunc={decreaseFunc} cardProduct={cardProduct} />
                     </div>
                 </div>
             </PageContainer>
