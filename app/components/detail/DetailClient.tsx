@@ -5,6 +5,7 @@ import PageContainer from "../containers/PageContainer"
 import Counter from "../general/Counter"
 import { useState } from "react"
 import { Rating } from "@mui/material"
+import Button from "../general/Button"
 
 // export type CardProductProps ifadesi Typescript'te bir tür tanimlamak icin kullanilir.
 export type CardProductProps = {
@@ -47,7 +48,7 @@ const DetailClient = ({ product }: { product: any }) => {
                     <div className="relative h-100 w-50 flex-1">
                         <Image src={product?.image} fill alt="" />
                     </div>
-                    <div className="w-1/2 space-y-3">
+                    <div className="w-full md:w-1/2 space-y-3">
                         <div className="text-xl md:text-2xl">{product?.name}</div>
                         <Rating name="read-only" value={productRating} readOnly />
                         <div className="text-slate-500">{product?.description}</div>
@@ -62,6 +63,7 @@ const DetailClient = ({ product }: { product: any }) => {
                         </div>
                         <Counter increaseFunc={increaseFunc} decreaseFunc={decreaseFunc} cardProduct={cardProduct} />
                         <div className="text-lg md:text-2xl text-orange-600 font-bold">{product.price} $</div>
+                        <Button text="Ürünü Sepete Ekle" small onClick={() => { }} />
                     </div>
                 </div>
             </PageContainer>
