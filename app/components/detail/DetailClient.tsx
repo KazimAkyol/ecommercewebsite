@@ -66,6 +66,13 @@ const DetailClient = ({ product }: { product: any }) => {
                         <Button text="Ürünü Sepete Ekle" small onClick={() => { }} />
                     </div>
                 </div>
+                <div>
+                    {
+                        product?.reviews?.map(prd => (
+                            
+                        ))
+                    }
+                </div>
             </PageContainer>
         </div>
     )
