@@ -45,7 +45,7 @@ const DetailClient = ({ product }: { product: any }) => {
         <div className="my-10">
             <PageContainer>
                 <div className="block md:flex gap-10 justify-center">
-                    <div className="relative h-100 w-50 flex-1">
+                    <div className="relative h-100 md:h-100 w-50 md:w-100 mb-3 md:mb-0">
                         <Image src={product?.image} fill alt="" />
                     </div>
                     <div className="w-full md:w-1/2 space-y-3">
