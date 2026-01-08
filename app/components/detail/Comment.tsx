@@ -1,9 +1,11 @@
-import React from 'react'
+"use client"
 
-const Comment = () => {
-  return (
-    <div>Comment</div>
-  )
+const Comment = ({ prd }: { prd: any }) => {
+
+    console.log(prd, "prd");
+    return (
+        <div>Comment</div>
+    )
 }
 
 export default Comment

@@ -6,6 +6,7 @@ import Counter from "../general/Counter"
 import { useState } from "react"
 import { Rating } from "@mui/material"
 import Button from "../general/Button"
+import Comment from "./Comment"
 
 // export type CardProductProps ifadesi Typescript'te bir tür tanimlamak icin kullanilir.
 export type CardProductProps = {
@@ -29,6 +30,8 @@ const DetailClient = ({ product }: { product: any }) => {
         image: product.image,
         inStock: product.inStock,
     })
+
+    console.log(product, "product");
 
     const increaseFunc = () => {
         if (cardProduct.quantity == 10) return
@@ -68,8 +71,8 @@ const DetailClient = ({ product }: { product: any }) => {
                 </div>
                 <div>
                     {
-                        product?.reviews?.map(prd => (
-                            
+                        product?.reviews?.map((prd: any) => (
+                            <Comment key={prd.id} prd={prd} />
                         ))
                     }
                 </div>
