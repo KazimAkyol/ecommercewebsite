@@ -7,6 +7,7 @@ import { useState } from "react"
 import { Rating } from "@mui/material"
 import Button from "../general/Button"
 import Comment from "./Comment"
+import Heading from "../general/Heading"
 
 // export type CardProductProps ifadesi Typescript'te bir tür tanimlamak icin kullanilir.
 export type CardProductProps = {
@@ -31,7 +32,7 @@ const DetailClient = ({ product }: { product: any }) => {
         inStock: product.inStock,
     })
 
-    console.log(product, "product");
+    // console.log(product, "product");
 
     const increaseFunc = () => {
         if (cardProduct.quantity == 10) return
@@ -52,23 +53,40 @@ const DetailClient = ({ product }: { product: any }) => {
                         <Image src={product?.image} fill alt="" />
                     </div>
                     <div className="w-full md:w-1/2 space-y-3">
-                        <div className="text-xl md:text-2xl">{product?.name}</div>
+                        {/* Mobil ve kücük ekranlarda: Ögenin genisligi tam olarak %100(w-full), yani tüm ekrani kaplar.
+                            Orta boyutlu ve daha büyük ekranlarda: Ögenin genisligi %50 (md:w-1/2), yani kapsayicisinin yarisini kaplar.
+                            Dikey bosluklar (space-y-3): Alt ögeler arasinda 12px bosluk ekler. */}
+                        <div className="text-xl md:text-2xl">
+                            {product?.name}
+                        </div>
                         <Rating name="read-only" value={productRating} readOnly />
-                        <div className="text-slate-500">{product?.description}</div>
+                        <div className="text-slate-500">
+                            {product?.description}
+                        </div>
                         <div className="flex items-center gap-2">
                             <div>STOK DURUMU:</div>
                             {
                                 product.inStock
                                     ?
-                                    <div className="text-green-500">Ürün Stokta Mevcut</div> :
-                                    <div className="text-red-500">Ürün Stokta Bulunmamakta</div>
+                                    <div className="text-green-500">
+                                        Ürün Stokta Mevcut
+                                    </div>
+                                    :
+                                    <div className="text-red-500">
+                                        Ürün Stokta Bulunmamakta
+                                    </div>
                             }
                         </div>
-                        <Counter increaseFunc={increaseFunc} decreaseFunc={decreaseFunc} cardProduct={cardProduct} />
+                        <Counter
+                            increaseFunc={increaseFunc}
+                            decreaseFunc={decreaseFunc}
+                            cardProduct={cardProduct}
+                        />
                         <div className="text-lg md:text-2xl text-orange-600 font-bold">{product.price} $</div>
                         <Button text="Ürünü Sepete Ekle" small onClick={() => { }} />
                     </div>
                 </div>
+                <Heading text="Yorumlar" />
                 <div>
                     {
                         product?.reviews?.map((prd: any) => (
