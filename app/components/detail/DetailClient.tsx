@@ -23,7 +23,7 @@ export type CardProductProps = {
 
 const DetailClient = ({ product }: { product: any }) => {
 
-    const {productCartQty} = UseCart();
+    const { productCartQty, addToBasket, cardPrdcts } = UseCart();
 
     const [cardProduct, setCardProduct] = useState<CardProductProps>({
         id: product.id,
@@ -35,7 +35,7 @@ const DetailClient = ({ product }: { product: any }) => {
         inStock: product.inStock,
     })
 
-    console.log(productCartQty, "productCartQty");
+    console.log(cardPrdcts, "cardPrdcts"); // null dönüyor, bakilacak.
 
     const increaseFunc = () => {
         if (cardProduct.quantity == 10) return
@@ -86,7 +86,11 @@ const DetailClient = ({ product }: { product: any }) => {
                             cardProduct={cardProduct}
                         />
                         <div className="text-lg md:text-2xl text-orange-600 font-bold">{product.price} $</div>
-                        <Button text="Ürünü Sepete Ekle" small onClick={() => { }} />
+                        <Button
+                        text="Ürünü Sepete Ekle"
+                        small
+                        onClick={() => { addToBasket(cardProduct) }}
+                        />
                     </div>
                 </div>
                 <Heading text="Yorumlar" />
