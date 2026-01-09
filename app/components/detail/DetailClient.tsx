@@ -8,6 +8,7 @@ import { Rating } from "@mui/material"
 import Button from "../general/Button"
 import Comment from "./Comment"
 import Heading from "../general/Heading"
+import UseCart from "@/hooks/useCart"
 
 // export type CardProductProps ifadesi Typescript'te bir tür tanimlamak icin kullanilir.
 export type CardProductProps = {
@@ -22,6 +23,8 @@ export type CardProductProps = {
 
 const DetailClient = ({ product }: { product: any }) => {
 
+    const {productCartQty} = UseCart();
+
     const [cardProduct, setCardProduct] = useState<CardProductProps>({
         id: product.id,
         name: product.name,
@@ -32,7 +35,7 @@ const DetailClient = ({ product }: { product: any }) => {
         inStock: product.inStock,
     })
 
-    // console.log(product, "product");
+    console.log(productCartQty, "productCartQty");
 
     const increaseFunc = () => {
         if (cardProduct.quantity == 10) return

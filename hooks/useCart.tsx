@@ -1,9 +1,11 @@
 "use client"
 
+import { CardProductProps } from "@/app/components/detail/DetailClient";
 import { createContext, useContext, useState } from "react";
 
 interface CartContextProps {
     productCartQty: number; // Sepetteki ürün miktari
+    addToBasket: (product: CardProductProps) => void
 }
 
 const CartContext = createContext<CartContextProps | null>(null)
@@ -31,7 +33,7 @@ const UseCart = () => {
     if (context == null) {
         throw new Error("Bir hata olustu");
     }
-    return context;
+    return context; // tüm sayfalarda kullanilabilir.
 }
 
 export default UseCart
