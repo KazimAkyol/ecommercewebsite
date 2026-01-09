@@ -1,5 +1,27 @@
-import { createContext } from "react";
+"use client"
 
-interface CartContextProps {}
+import { createContext, useState } from "react";
 
-const CartContext = createContext(null)
+interface CartContextProps {
+    productCartQty: number; // Sepetteki ürün miktari
+}
+
+const CartContext = createContext<CartContextProps | null>(null)
+
+
+interface Props {
+    [propName: string]: any;
+}
+
+export const CartContextProvider = (props: Props) => {
+
+    const [productCartQty, setProductCartQty] = useState(0)
+
+    let value = {
+        productCartQty
+    }
+
+    return (
+        <CartContext.Provider value={value} {...props} />
+    )
+}
