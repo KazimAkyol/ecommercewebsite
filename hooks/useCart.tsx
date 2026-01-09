@@ -1,6 +1,6 @@
 "use client"
 
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 interface CartContextProps {
     productCartQty: number; // Sepetteki ürün miktari
@@ -25,3 +25,13 @@ export const CartContextProvider = (props: Props) => {
         <CartContext.Provider value={value} {...props} />
     )
 }
+
+const UseCart = () => {
+    const context = useContext(CartContext);
+    if (context == null) {
+        throw new Error("Bir hata olustu");
+    }
+    return context;
+}
+
+export default UseCart
