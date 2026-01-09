@@ -2,6 +2,7 @@
 
 import { RxAvatar } from "react-icons/rx";
 import Avatar from "../general/Avatar";
+import { Rating } from "@mui/material";
 
 const Comment = ({ prd }: { prd: any }) => {
 
@@ -15,6 +16,7 @@ const Comment = ({ prd }: { prd: any }) => {
                 <Avatar image={prd?.user?.image} />
             </div>
             <div>{prd?.user?.name}</div>
+            <Rating name="read-only" value={prd?.user?.rating} readOnly />
             <div className="text-slate-500">{prd?.comment}</div>
         </div>
     )
