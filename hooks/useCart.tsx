@@ -5,7 +5,7 @@ import { createContext, useCallback, useContext, useState } from "react";
 
 interface CartContextProps {
     productCartQty: number; // Sepetteki ürün miktari
-    cardPrdcts: CardProductProps[] | null; // Sepetteki ürün listesi
+    cartPrdcts: CardProductProps[] | null; // Sepetteki ürün listesi
     addToBasket: (product: CardProductProps) => void
 }
 
@@ -19,10 +19,10 @@ interface Props {
 export const CartContextProvider = (props: Props) => {
 
     const [productCartQty, setProductCartQty] = useState(0) // Sepetteki ürün miktari
-    const [cardPrdcts, setCardPrdcts] = useState<CardProductProps[] | null>(null) // Sepetteki ürün listesi
+    const [cartPrdcts, setCartPrdcts] = useState<CardProductProps[] | null>(null) // Sepetteki ürün listesi
 
     const addToBasket = useCallback((product: CardProductProps) => {
-        setCardPrdcts(prev => {
+        setCartPrdcts(prev => {
             let updatedCart;
             if (prev) {
                 updatedCart = [...prev, product];
@@ -31,12 +31,12 @@ export const CartContextProvider = (props: Props) => {
             }
             return updatedCart;
         })
-    }, [cardPrdcts]);
+    }, [cartPrdcts]);
 
     let value = {
         productCartQty,
         addToBasket,
-        cardPrdcts
+        cartPrdcts
     }
 
     return (
