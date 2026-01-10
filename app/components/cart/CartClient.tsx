@@ -1,8 +1,23 @@
 "use client"
 
+import UseCart from "@/hooks/useCart"
+import PageContainer from "../containers/PageContainer"
+
 const CartClient = () => {
+
+    const { cartPrdcts } = UseCart();
+
+    console.log(cartPrdcts, "cartPrdcts");
+
     return (
-        <div>CartClient</div>
+        <div>
+            <PageContainer>
+                <div>
+
+                </div>
+            </PageContainer>
+
+        </div>
     )
 }
 
