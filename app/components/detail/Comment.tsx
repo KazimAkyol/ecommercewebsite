@@ -6,7 +6,6 @@ import { Rating } from "@mui/material";
 
 const Comment = ({ prd }: { prd: any }) => {
 
-    // console.log(prd, "prd");
     return (
         <div className="border w-full md:w-1/3 p-2 rounded-lg my-3">
             {/* <div>
