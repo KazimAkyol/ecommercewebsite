@@ -1,7 +1,7 @@
 "use client"
 /* bir Sepet (Cart) Context API yapisi oluturmak icin kullanilan bir React uygulamasinin parcasidir. Context API, bilesenler arasinda veri paylasimini kolaylastiran bir yöntemdir ve bu örnekte sepetle ilgili verilerin tüm bilesenlerde kullanilmasini saglar. */
 import { CardProductProps } from "@/app/components/detail/DetailClient";
-import { createContext, useCallback, useContext, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useState } from "react";
 
 interface CartContextProps {
     productCartQty: number; // Sepetteki ürün miktari
@@ -21,6 +21,14 @@ export const CartContextProvider = (props: Props) => {
     const [productCartQty, setProductCartQty] = useState(0) // Sepetteki ürün miktari
     const [cartPrdcts, setCartPrdcts] = useState<CardProductProps[] | null>(null) // Sepetteki ürün listesi
 
+    useEffect(() => {
+        let getItem: any = localStorage.getItem("cart");
+        let getItemParse: CardProductProps[] | null = JSON.parse(getItem);
+        setCartPrdcts(getItemParse);
+    }, []);
+    /* useEffect: Sayfa yüklendiginde, yerel depolama (localStorage) kontrol edilir ve cart adli veiriyi alarak sepetteki ürünleri cartPrdcts state'ine set eder. */
+
+    /* useCallback: React Hook'larindan biridir ve fonksiyonun bellekte yeniden olusturulmasini önlemek amaciyla kullanilir. */
     const addToBasket = useCallback((product: CardProductProps) => {
         setCartPrdcts(prev => {
             let updatedCart;
@@ -29,6 +37,7 @@ export const CartContextProvider = (props: Props) => {
             } else {
                 updatedCart = [product];
             }
+            localStorage.setItem("cart", JSON.stringify(updatedCart));
             return updatedCart;
         })
     }, [cartPrdcts]);

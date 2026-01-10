@@ -36,8 +36,6 @@ const DetailClient = ({ product }: { product: any }) => {
         inStock: product.inStock,
     })
 
-    console.log(cartPrdcts, "cartPrdcts");
-
     useEffect(() => {
         setDisplayButton(false);
         let controlDisplay: any = cartPrdcts?.findIndex(cart => cart.id == product.id);
