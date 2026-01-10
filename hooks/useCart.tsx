@@ -1,5 +1,5 @@
 "use client"
-
+/* bir Sepet (Cart) Context API yapisi oluturmak icin kullanilan bir React uygulamasinin parcasidir. Context API, bilesenler arasinda veri paylasimini kolaylastiran bir yöntemdir ve bu örnekte sepetle ilgili verilerin tüm bilesenlerde kullanilmasini saglar. */
 import { CardProductProps } from "@/app/components/detail/DetailClient";
 import { createContext, useCallback, useContext, useState } from "react";
 
@@ -10,6 +10,7 @@ interface CartContextProps {
 }
 
 const CartContext = createContext<CartContextProps | null>(null)
+/* createContext=> React bilesenleri genellikle birbirlerinden bagimsiz calisir. Ancak bazen, bir bilesen tarafindan yönetilen veriye, cok sayida bilesenin erismesi gerekebilir. Bu tür durumlarda Context API kullanilarak, bir "global state" olusturabilir ve bu veriler, uygulamanin herhangi bir yerinden erisilebilir hale getirilebilir. */
 
 interface Props {
     [propName: string]: any;
