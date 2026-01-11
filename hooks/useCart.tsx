@@ -2,11 +2,13 @@
 /* bir Sepet (Cart) Context API yapisi oluturmak icin kullanilan bir React uygulamasinin parcasidir. Context API, bilesenler arasinda veri paylasimini kolaylastiran bir yöntemdir ve bu örnekte sepetle ilgili verilerin tüm bilesenlerde kullanilmasini saglar. */
 import { CardProductProps } from "@/app/components/detail/DetailClient";
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 interface CartContextProps {
     productCartQty: number; // Sepetteki ürün miktari
     cartPrdcts: CardProductProps[] | null; // Sepetteki ürün listesi
-    addToBasket: (product: CardProductProps) => void
+    addToBasket: (product: CardProductProps) => void // Sepete ürün ekleme function
+    removeFromCart: (product: CardProductProps) => void // Sepetten ürün silme function
 }
 
 const CartContext = createContext<CartContextProps | null>(null)
@@ -37,15 +39,27 @@ export const CartContextProvider = (props: Props) => {
             } else {
                 updatedCart = [product];
             }
+            toast.success("Ürün sepete eklendi");
             localStorage.setItem("cart", JSON.stringify(updatedCart));
             return updatedCart;
         })
     }, [cartPrdcts]);
 
+    const removeFromCart = useCallback((product: CardProductProps) => {
+        if (cartPrdcts) {
+            const filteredProducts = cartPrdcts.filter(cart => cart.id !== product.id);
+
+            setCartPrdcts(filteredProducts);
+            toast.success("Ürün sepetten silindi");
+            localStorage.setItem("cart", JSON.stringify(filteredProducts));
+        }
+    }, [cartPrdcts]);
+
     let value = {
         productCartQty,
         addToBasket,
-        cartPrdcts
+        cartPrdcts,
+        removeFromCart
     }
 
     return (

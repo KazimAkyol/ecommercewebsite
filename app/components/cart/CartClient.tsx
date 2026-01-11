@@ -5,7 +5,6 @@ import PageContainer from "../containers/PageContainer"
 import Image from "next/image";
 import Button from "../general/Button";
 
-
 const CartClient = () => {
 
     const { cartPrdcts } = UseCart();
