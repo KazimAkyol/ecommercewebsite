@@ -1,7 +1,7 @@
 export const products = [
     {
         id: "64a654593e91b8e73a351e9b",
-        name: "iphone 14",
+        name: "Apple iPhone 14",
         description: "This model includes the A15 Bionic chip with a 6-core GPU, which offers incredible performance and efficiency for demanding workloads, and is designed with privacy and security built in. iPhone 14 has critical safety capabilities such as crash detection and emergency SOS via satellite.",
         price: 999,
         brand: "apple",

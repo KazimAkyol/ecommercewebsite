@@ -3,6 +3,8 @@
 import UseCart from "@/hooks/useCart"
 import PageContainer from "../containers/PageContainer"
 import Image from "next/image";
+import Button from "../general/Button";
+
 
 const CartClient = () => {
 
@@ -27,13 +29,15 @@ const CartClient = () => {
                     {
                         cartPrdcts.map(cart => (
                             <div className="flex items-center justify-between text-center my-5" key={cart.id}>
-                                <div>
+                                <div className="w-1/5 items-center justify-center">
                                     <Image src={cart.image} width={100} height={100} alt="" />
                                 </div>
-                                <div>{cart.name}</div>
-                                <div>{cart.quantity}</div>
-                                <div>{cart.price} $</div>
-                                <div>Ürün </div>
+                                <div className="w-1/5">{cart.name}</div>
+                                <div className="w-1/5">{cart.quantity}</div>
+                                <div className="w-1/5  text-orange-600 text-lg">{cart.price} $</div>
+                                <div className="w-1/5">
+                                    <Button text="Ürünü Sil" small onClick={() => { }} />
+                                </div>
                             </div>
                         ))
                     }
