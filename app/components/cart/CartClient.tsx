@@ -39,7 +39,7 @@ const CartClient = () => {
                                         text="Ürünü Sil"
                                         small
                                         onClick={() => removeFromCart(cart)}
-                                        className="cursor-pointer"
+                                        className="hover:cursor-pointer"
                                     />
                                 </div>
                             </div>
