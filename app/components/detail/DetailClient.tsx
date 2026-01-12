@@ -48,6 +48,7 @@ const DetailClient = ({ product }: { product: any }) => {
         if (cardProduct.quantity == 10) return
         setCardProduct((prev) => ({ ...prev, quantity: prev.quantity + 1 }))
     }
+    
     const decreaseFunc = () => {
         if (cardProduct.quantity == 1) return
         setCardProduct((prev) => ({ ...prev, quantity: prev.quantity - 1 }))

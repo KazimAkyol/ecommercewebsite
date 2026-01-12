@@ -38,7 +38,9 @@ const CartClient = () => {
                                     <Button
                                         text="Ürünü Sil"
                                         small
-                                        onClick={() => removeFromCart(cart)} />
+                                        onClick={() => removeFromCart(cart)}
+                                        className="cursor-pointer"
+                                    />
                                 </div>
                             </div>
                         ))
