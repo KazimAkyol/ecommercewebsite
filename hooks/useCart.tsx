@@ -9,6 +9,7 @@ interface CartContextProps {
     cartPrdcts: CardProductProps[] | null; // Sepetteki ürün listesi
     addToBasket: (product: CardProductProps) => void // Sepete ürün ekleme function
     removeFromCart: (product: CardProductProps) => void // Sepetten ürün silme function
+    removeCart: () => void // Sepeti silme function
 }
 
 const CartContext = createContext<CartContextProps | null>(null)
@@ -29,6 +30,12 @@ export const CartContextProvider = (props: Props) => {
         setCartPrdcts(getItemParse);
     }, []);
     /* useEffect: Sayfa yüklendiginde, yerel depolama (localStorage) kontrol edilir ve cart adli veiriyi alarak sepetteki ürünleri cartPrdcts state'ine set eder. */
+
+    const removeCart = useCallback(() => {
+        setCartPrdcts(null);
+        toast.success("Sepet temizlendi");
+        localStorage.setItem("cart", JSON.stringify(null));
+    }, []);
 
     /* useCallback: React Hook'larindan biridir ve fonksiyonun bellekte yeniden olusturulmasini önlemek amaciyla kullanilir. */
     const addToBasket = useCallback((product: CardProductProps) => {
@@ -59,7 +66,8 @@ export const CartContextProvider = (props: Props) => {
         productCartQty,
         addToBasket,
         cartPrdcts,
-        removeFromCart
+        removeFromCart,
+        removeCart
     }
 
     return (

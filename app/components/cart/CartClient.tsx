@@ -7,7 +7,7 @@ import Button from "../general/Button";
 
 const CartClient = () => {
 
-    const { cartPrdcts } = UseCart();
+    const { cartPrdcts, removeFromCart, removeCart } = UseCart();
 
     console.log(cartPrdcts, "cartPrdcts");
 
@@ -35,11 +35,18 @@ const CartClient = () => {
                                 <div className="w-1/5">{cart.quantity}</div>
                                 <div className="w-1/5  text-orange-600 text-lg">{cart.price} $</div>
                                 <div className="w-1/5">
-                                    <Button text="Ürünü Sil" small onClick={() => { }} />
+                                    <Button
+                                        text="Ürünü Sil"
+                                        small
+                                        onClick={() => removeFromCart(cart)} />
                                 </div>
                             </div>
                         ))
                     }
+                </div>
+                <div className="flex items-center justify-between my-5 py-5 border-t">
+                    <button onClick={() => removeCart()} className="w-1/5 underline text-sm">Sepeti Sil</button>
+                    <div className="text-lg md:text-2xl text-orange-600 font-bold">1000 $</div>
                 </div>
             </PageContainer>
         </div>
