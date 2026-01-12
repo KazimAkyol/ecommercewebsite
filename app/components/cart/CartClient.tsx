@@ -4,6 +4,8 @@ import UseCart from "@/hooks/useCart"
 import PageContainer from "../containers/PageContainer"
 import Image from "next/image";
 import Button from "../general/Button";
+import { CardProductProps } from "../detail/DetailClient";
+import Counter from "../general/Counter";
 
 const CartClient = () => {
 
@@ -11,8 +13,11 @@ const CartClient = () => {
 
     console.log(cartPrdcts, "cartPrdcts");
 
-    if (!cartPrdcts || cartPrdcts.length == 0)
+    if (!cartPrdcts || cartPrdcts.length == 0) {
         return <div>Sepetinizde ürün bulunmamaktadir...</div>
+    }
+
+    let cartPrdctsTotal = cartPrdcts.reduce((acc: any, item: CardProductProps) => acc + item.quantity * item.price, 0);
 
     return (
         <div className="my-3 md:my-10">
@@ -32,7 +37,13 @@ const CartClient = () => {
                                     <Image src={cart.image} width={100} height={100} alt="" />
                                 </div>
                                 <div className="w-1/5">{cart.name}</div>
-                                <div className="w-1/5">{cart.quantity}</div>
+                                <div className="w-1/5">
+                                    <Counter
+                                        cardProduct={cart}
+                                        increaseFunc={() => { }}
+                                        decreaseFunc={() => { }}
+                                    />
+                                </div>
                                 <div className="w-1/5  text-orange-600 text-lg">{cart.price} $</div>
                                 <div className="w-1/5">
                                     <Button
@@ -48,7 +59,7 @@ const CartClient = () => {
                 </div>
                 <div className="flex items-center justify-between my-5 py-5 border-t">
                     <button onClick={() => removeCart()} className="w-1/5 underline text-sm">Sepeti Sil</button>
-                    <div className="text-lg md:text-2xl text-orange-600 font-bold">1000 $</div>
+                    <div className="text-lg md:text-2xl text-orange-600 font-bold">{cartPrdctsTotal} $</div>
                 </div>
             </PageContainer>
         </div>
