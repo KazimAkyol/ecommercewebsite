@@ -8,6 +8,8 @@ interface CartContextProps {
     productCartQty: number; // Sepetteki ürün miktari
     cartPrdcts: CardProductProps[] | null; // Sepetteki ürün listesi
     addToBasket: (product: CardProductProps) => void // Sepete ürün ekleme function
+    addToBasketIncrease: (product: CardProductProps) => void // Sepetteki ürün arttirma function
+    addToBasketDecrease: (product: CardProductProps) => void // Sepetteki ürün azaltma function
     removeFromCart: (product: CardProductProps) => void // Sepetten ürün silme function
     removeCart: () => void // Sepeti silme function
 }
@@ -30,6 +32,48 @@ export const CartContextProvider = (props: Props) => {
         setCartPrdcts(getItemParse);
     }, []);
     /* useEffect: Sayfa yüklendiginde, yerel depolama (localStorage) kontrol edilir ve cart adli veiriyi alarak sepetteki ürünleri cartPrdcts state'ine set eder. */
+
+    const addToBasketIncrease = useCallback((product: CardProductProps) => {
+        let updatedCart;
+        if (product.quantity == 10) {
+            return toast.error("Maksimum 10 adet ürün ekleyebilirsiniz.");
+        }
+        if (cartPrdcts) {
+            updatedCart = [...cartPrdcts];
+            const existingItem = cartPrdcts.findIndex(item => item.id === product.id);
+
+            if (existingItem > -1) {
+                updatedCart[existingItem] = {
+                    ...updatedCart[existingItem],
+                    quantity: updatedCart[existingItem].quantity + 1
+                }
+            }
+            setCartPrdcts(updatedCart);
+            toast.success("Ürün miktari arttirildi");
+            localStorage.setItem("cart", JSON.stringify(updatedCart));
+        }
+    }, [cartPrdcts]);
+
+        const addToBasketDecrease = useCallback((product: CardProductProps) => {
+        let updatedCart;
+        if (product.quantity == 1) {
+            return toast.error("Minimum 1 adet ürün bulunmalidir.");
+        }
+        if (cartPrdcts) {
+            updatedCart = [...cartPrdcts];
+            const existingItem = cartPrdcts.findIndex(item => item.id === product.id);
+
+            if (existingItem > -1) {
+                updatedCart[existingItem] = {
+                    ...updatedCart[existingItem],
+                    quantity: updatedCart[existingItem].quantity - 1
+                }
+            }
+            setCartPrdcts(updatedCart);
+            toast.success("Ürün miktari azaltildi");
+            localStorage.setItem("cart", JSON.stringify(updatedCart));
+        }
+    }, [cartPrdcts]);
 
     const removeCart = useCallback(() => {
         setCartPrdcts(null);
@@ -67,7 +111,9 @@ export const CartContextProvider = (props: Props) => {
         addToBasket,
         cartPrdcts,
         removeFromCart,
-        removeCart
+        removeCart,
+        addToBasketIncrease,
+        addToBasketDecrease
     }
 
     return (
