@@ -31,8 +31,9 @@ export const CartContextProvider = (props: Props) => {
         let getItemParse: CardProductProps[] | null = JSON.parse(getItem);
         setCartPrdcts(getItemParse);
     }, []);
-    /* useEffect: Sayfa yüklendiginde, yerel depolama (localStorage) kontrol edilir ve cart adli veiriyi alarak sepetteki ürünleri cartPrdcts state'ine set eder. */
+    /* useEffect: Sayfa yüklendiginde, yerel depolama (localStorage) kontrol edilir ve cart adli veriyi alarak sepetteki ürünleri cartPrdcts state'ine set eder. */
 
+    /* useCallback: React Hook'larindan biridir ve fonksiyonun bellekte yeniden olusturulmasini önlemek amaciyla kullanilir. */
     const addToBasketIncrease = useCallback((product: CardProductProps) => {
         let updatedCart;
         if (product.quantity == 10) {
@@ -54,7 +55,7 @@ export const CartContextProvider = (props: Props) => {
         }
     }, [cartPrdcts]);
 
-        const addToBasketDecrease = useCallback((product: CardProductProps) => {
+    const addToBasketDecrease = useCallback((product: CardProductProps) => {
         let updatedCart;
         if (product.quantity == 1) {
             return toast.error("Minimum 1 adet ürün bulunmalidir.");
@@ -81,7 +82,6 @@ export const CartContextProvider = (props: Props) => {
         localStorage.setItem("cart", JSON.stringify(null));
     }, []);
 
-    /* useCallback: React Hook'larindan biridir ve fonksiyonun bellekte yeniden olusturulmasini önlemek amaciyla kullanilir. */
     const addToBasket = useCallback((product: CardProductProps) => {
         setCartPrdcts(prev => {
             let updatedCart;
@@ -130,3 +130,5 @@ const UseCart = () => {
 }
 
 export default UseCart
+
+/* Bu yapi, React Context API kullanarak sepet islemlerini merkezi bir noktada yönetir. Sepetle ilgili ürün ekleme, cikarma, arttirma, azaltma ve temizleme islemleri icin tüm bilesenler tarafindan erisilebilir. localStorage sayesinde, sepet verisi tarayicida kalici hale gelir ve sayfa yenilendiginde bile veriler korunur. */

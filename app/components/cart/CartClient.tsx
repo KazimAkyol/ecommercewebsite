@@ -9,7 +9,13 @@ import Counter from "../general/Counter";
 
 const CartClient = () => {
 
-    const { cartPrdcts, removeFromCart, removeCart, addToBasketIncrease, addToBasketDecrease } = UseCart();
+    const {
+        cartPrdcts,
+        removeFromCart,
+        removeCart,
+        addToBasketIncrease,
+        addToBasketDecrease
+    } = UseCart();
 
     console.log(cartPrdcts, "cartPrdcts");
 
@@ -50,7 +56,7 @@ const CartClient = () => {
                                         text="Ürünü Sil"
                                         small
                                         onClick={() => removeFromCart(cart)}
-                                        className="hover:cursor-pointer"
+                                        className="hover:cursor-pointer hover:bg-red-800 w-4/5"
                                     />
                                 </div>
                             </div>
@@ -58,8 +64,14 @@ const CartClient = () => {
                     }
                 </div>
                 <div className="flex items-center justify-between my-5 py-5 border-t">
-                    <button onClick={() => removeCart()} className="w-1/5 underline text-sm">Sepeti Sil</button>
-                    <div className="text-lg md:text-2xl text-orange-600 font-bold">{cartPrdctsTotal} $</div>
+                    <button
+                        onClick={() => removeCart()}
+                        className="w-1/5 underline text-sm">
+                        Sepeti Sil
+                    </button>
+                    <div
+                        className="text-lg md:text-2xl text-orange-600 font-bold">{cartPrdctsTotal} $
+                    </div>
                 </div>
             </PageContainer>
         </div>
