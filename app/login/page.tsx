@@ -1,7 +1,10 @@
+import LoginClient from "../components/auth/LoginClient"
 
 const Login = () => {
     return (
-        <div>Login</div>
+        <div>
+            <LoginClient />
+        </div>
     )
 }
 

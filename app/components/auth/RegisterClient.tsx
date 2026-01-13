@@ -1,7 +1,12 @@
+"use client"
+
+import AuthContainer from "../containers/AuthContainer"
 
 const RegisterClient = () => {
     return (
-        <div>RegisterClient</div>
+        <AuthContainer>
+            Register
+        </AuthContainer>
     )
 }
 

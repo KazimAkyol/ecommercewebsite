@@ -1,7 +1,11 @@
+import React from 'react'
 
-const AuthContainer = () => {
+const AuthContainer = ({ children }: { children: React.ReactNode }) => {
     return (
-        <div>AuthContainer</div>
+        <div
+            className='min-h-fit mt-5 h-full w-full flex items-center justify-center'>
+            {children}
+        </div>
     )
 }
 
