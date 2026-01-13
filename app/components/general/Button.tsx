@@ -14,7 +14,8 @@ const Button: React.FC<ButtonProps> = ({ text, onClick, small, outline, disabled
     return (
         <button
             disabled={disabled}
-            className={`my-1 flex items-center justify-center gap-2 rounded-lg p-3 ${small ? "w-62.5" : "w-full"} ${outline ? "border text-black" : "bg-black text-white"} ${className}`}
+            className={`my-1 flex items-center justify-center gap-2 rounded-lg p-3
+                ${small ? "w-62.5" : "w-full"} ${outline ? "border text-black" : "bg-black text-white"} ${className}`}
             onClick={onClick}
         >
             {Icon && <Icon />}
