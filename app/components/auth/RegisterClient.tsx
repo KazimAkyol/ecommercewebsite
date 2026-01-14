@@ -31,7 +31,7 @@ const RegisterClient = () => {
                 <Input placeholder="Password" type="password" id="password" register={register} errors={errors} required />
                 <Button text="Sign Up" onClick={handleSubmit(onSubmit)}></Button>
                 <div>Have an account?</div>
-                <div>OR</div>
+                <div className="text-center my-2 font-bold text-lg">OR</div>
                 <Button text="Sign Up with Google" icon={FaGoogle} outline onClick={() => { }}></Button>
             </div>
         </AuthContainer>
