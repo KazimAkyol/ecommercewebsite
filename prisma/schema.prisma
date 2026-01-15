@@ -1,7 +1,4 @@
-datasource db {
-  provider = "mongodb"
-  url      = env("DATABASE_URL")
-}
+
 
 generator client {
   provider        = "prisma-client-js"
@@ -70,3 +67,5 @@ enum Role{
     USER
     ADMIN
 }
+
+/* username: akyolkzm2016493_db_user password: bzEO0ToMuSGXojvA */
