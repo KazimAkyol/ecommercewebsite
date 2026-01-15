@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const MONGODB_URI = process.env.MONGODB_URI!;
 
 if (!MONGODB_URI) {
-    throw new Error('Lütfen .env dosyanızda MONGODB_URI tanımlayın');
+    throw new Error('Lütfen .env dosyanizda MONGODB_URI tanimlayin');
 }
 
 /**
