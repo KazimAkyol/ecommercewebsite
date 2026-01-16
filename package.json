@@ -6,10 +6,7 @@
         "dev": "next dev",
         "build": "next build",
         "start": "next start",
-        "lint": "eslint",
-        "prisma:generate": "prisma generate",
-        "prisma:push": "prisma db push",
-        "prisma:studio": "prisma studio"
+        "lint": "eslint"
     },
     "dependencies": {
         "@auth/prisma-adapter": "^2.11.1",
