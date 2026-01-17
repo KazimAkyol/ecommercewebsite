@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import dbConnect from '@/lib/db/mongodb';
-import { Product } from '@/lib/db/models';
+import { Product } from '@/app/lib/db/models';
+import dbConnect from '@/app/lib/db/mongodb';
+
 
 // GET - Tüm ürünleri getir
 export async function GET(request: NextRequest) {
