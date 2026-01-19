@@ -1,50 +1,88 @@
 import mongoose from 'mongoose';
 
-declare global {
-    var mongoose: {
-        conn: typeof mongoose | null;
-        promise: Promise<typeof mongoose> | null;
-    };
-}
+class Database {
+    private static instance: Database;
+    private connection: typeof mongoose | null = null;
+    private connectionPromise: Promise<typeof mongoose> | null = null;
 
-const MONGODB_URI = process.env.MONGODB_URI;
+    private constructor() { }
 
-if (!MONGODB_URI) {
-    throw new Error(
-        'Please define the MONGODB_URI environment variable inside .env.local'
-    );
-}
-
-let cached = global.mongoose;
-
-if (!cached) {
-    cached = global.mongoose = { conn: null, promise: null };
-}
-
-async function dbConnect() {
-    if (cached.conn) {
-        return cached.conn;
+    public static getInstance(): Database {
+        if (!Database.instance) {
+            Database.instance = new Database();
+        }
+        return Database.instance;
     }
 
-    if (!cached.promise) {
-        const opts = {
-            bufferCommands: false,
-        };
+    public async connect(): Promise<typeof mongoose> {
+        if (this.connection) {
+            return this.connection;
+        }
 
-        cached.promise = mongoose.connect(MONGODB_URI!, opts).then((mongoose) => {
+        if (this.connectionPromise) {
+            return this.connectionPromise;
+        }
+
+        const MONGODB_URI = process.env.MONGODB_URI;
+
+        if (!MONGODB_URI) {
+            throw new Error('MONGODB_URI is not defined in environment variables');
+        }
+
+        try {
+            this.connectionPromise = mongoose.connect(MONGODB_URI, {
+                bufferCommands: false,
+                maxPoolSize: 10,
+            });
+
+            this.connection = await this.connectionPromise;
+
             console.log('✅ MongoDB connected successfully');
-            return mongoose;
+            console.log(`📍 Database: ${this.connection.connection.name}`);
+
+            this.setupEventListeners();
+
+            return this.connection;
+        } catch (error) {
+            this.connectionPromise = null;
+            console.error('❌ MongoDB connection failed:', error);
+            throw error;
+        }
+    }
+
+    private setupEventListeners(): void {
+        mongoose.connection.on('connected', () => {
+            console.log('🔌 Mongoose connected to MongoDB');
+        });
+
+        mongoose.connection.on('error', (err) => {
+            console.error('❌ Mongoose connection error:', err);
+        });
+
+        mongoose.connection.on('disconnected', () => {
+            console.log('🔌 Mongoose disconnected');
         });
     }
 
-    try {
-        cached.conn = await cached.promise;
-    } catch (e) {
-        cached.promise = null;
-        throw e;
+    public async disconnect(): Promise<void> {
+        if (this.connection) {
+            await mongoose.disconnect();
+            this.connection = null;
+            this.connectionPromise = null;
+            console.log('👋 MongoDB disconnected');
+        }
     }
 
-    return cached.conn;
+    public isConnected(): boolean {
+        return mongoose.connection.readyState === 1;
+    }
 }
 
+const dbConnect = async () => {
+    const db = Database.getInstance();
+    return db.connect();
+};
+
 export default dbConnect;
+export const isConnected = () => Database.getInstance().isConnected();
+export const dbDisconnect = () => Database.getInstance().disconnect();
