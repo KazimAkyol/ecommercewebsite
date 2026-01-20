@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
-// .env.local dosyasını yükle
-dotenv.config({ path: '.env.local' });
+// .env dosyasını yükle
+dotenv.config({ path: '.env' });
 
 async function testConnection() {
     try {
@@ -11,7 +11,7 @@ async function testConnection() {
         const uri = process.env.MONGODB_URI;
 
         if (!uri) {
-            throw new Error('MONGODB_URI not found in .env.local');
+            throw new Error('MONGODB_URI not found in .env');
         }
 
         // Password'ü gizleyerek URI'yi göster
