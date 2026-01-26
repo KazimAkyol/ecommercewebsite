@@ -2,8 +2,8 @@ import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import PrismaClient from "@prisma/client";
-
-const prisma = new PrismaClient();
+import prisma from "@/libs/prismadb";
+import CredentialsProvider from "next-auth/providers/credentials";
 
 export default NextAuth({
     adapter: PrismaAdapter(prisma),
@@ -12,5 +12,18 @@ export default NextAuth({
             clientId: process.env.GOOGLE_CLIENT_ID as string,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
         }),
+        CredentialsProvider({
+            name: "credentials",
+            credentials: {
+                email: { label: "email", type: "text" },
+                password: { label: "password", type: "password" }
+            },
+            async authorize(credentials, req) {
+                if (!credentials?.email || !credentials?.password) {
+                    throw new Error("Invalid email or password")
+                }
+
+            }
+        })
     ],
 })
