@@ -8,8 +8,13 @@ import Input from "../general/Input"
 import Button from "../general/Button"
 import Link from "next/link"
 import { InputProps } from "@mui/material"
+import { signIn } from "next-auth/react"
+import { useRouter } from "next/navigation"
+import toast from "react-hot-toast"
 
 const LoginClient = () => {
+
+    const router = useRouter();
 
     const {
         register,
@@ -19,7 +24,20 @@ const LoginClient = () => {
     } = useForm<FieldValues>()
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
-        console.log(data);
+        signIn("credentials", {
+            ...data,
+            redirect: false
+        }).then((callback => {
+            if (callback?.ok) {
+                router.push("/cart")
+                router.refresh();
+                toast.success("Logged in!")
+            }
+
+            if (callback?.error) {
+                toast.error(callback.error)
+            }
+        }))
     }
 
     return (
